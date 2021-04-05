@@ -1,3 +1,6 @@
 dist
 cabal-dev
 upload-docs
+.vscode
+.stack-work
+dist-newstyle
