@@ -20,7 +20,6 @@ module Network.KRPC.Method
 import Data.BEncode (BEncode)
 import Data.ByteString.Char8 as BC
 import Data.Char
-import Data.Monoid
 import Data.List as L
 import Data.String
 import Data.Typeable
@@ -47,7 +46,7 @@ newtype Method param result = Method { methodName :: MethodName }
 instance (Typeable a, Typeable b) => Show (Method a b) where
   showsPrec _ = showsMethod
 
-showsMethod :: forall a. forall b. Typeable a => Typeable b
+showsMethod :: forall a b. Typeable a => Typeable b
             => Method a b -> ShowS
 showsMethod (Method name) =
     showString (BC.unpack name) <>

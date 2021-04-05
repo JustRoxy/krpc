@@ -151,8 +151,9 @@ class (MonadBaseControl IO m, MonadLogger m, MonadIO m)
   -- | Can be used to add logging for instance.
   liftHandler :: h a -> m a
 
-  default liftHandler :: m a -> m a
-  liftHandler = id
+  --TODO: Rewrite this
+  --default liftHandler :: m a -> m a
+  --liftHandler = id
 
 instance (MonadBaseControl IO h, MonadLogger h, MonadIO h)
       => MonadKRPC h (ReaderT (Manager h) h) where
@@ -161,7 +162,7 @@ instance (MonadBaseControl IO h, MonadLogger h, MonadIO h)
 
 sockAddrFamily :: SockAddr -> Family
 sockAddrFamily (SockAddrInet  _ _    ) = AF_INET
-sockAddrFamily (SockAddrInet6 _ _ _ _) = AF_INET6
+sockAddrFamily SockAddrInet6 {} = AF_INET6
 sockAddrFamily (SockAddrUnix  _      ) = AF_UNIX
 
 -- | Bind socket to the specified address. To enable query handling
